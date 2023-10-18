@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='card.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='table.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='header.css') }}">
+    <style>
+        .nav-link {
+            color: #010122d5 !important;
+        }
+        
+        .container {
+            margin: 5px;
+        }
+    </style>
+    <title>Inscription Jeune</title>
+</head>
+
+<body>
+
+    <header class="fixed-top bg-white">
+
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+
+                <ul class="navbar-nav ms-auto align-items-end">
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="#">
+                            <img src="../static/logo.png" alt="Logo" srcset="">
+                        </a>
+                    </li>
+                </ul>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold accordion-item" href="{{ url_for('liste_jeunes') }}">
+                                <i class="bi bi-person-workspace me-2"></i> Jeunes
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold" href="#">
+                                <i class="bi bi-mortarboard  me-2"></i> Formateurs
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold" href="#">
+                                <i class="bi bi-book  me-2"></i> Formations
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold" href="#">
+                                <i class="bi bi-info-circle me-2"></i> A propos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold" href="#">
+                                <i class="bi bi-question-circle me-2"></i> Aide
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold" href="{{ url_for('deconnection') }}" style="margin-right: -250px;">
+                                <i class="bi bi-person me-2"></i> Se deconnecter
+                            </a>
+                        </li>
+                    </ul>
+
+
+                </div>
+
+            </div>
+        </nav>
+
+    </header> <br><br><br><br> {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %}
+    <div id="flash-messages">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}" style="text-align: center;">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %} {% endwith %}
+    <div class="container row mx-auto my-5">
+        <h4 class="text-center" style="margin-bottom: 2%;">Inscription Jeune</h4>
+        <div class="row justify-content-center" style=" margin-left: 3%;">
+            <div class="col-md-6">
+                <form method="POST" action="{{ url_for('inscription_jeune') }}">
+                    <div class="mb-3">
+                        <label for="nom" class="form-label">Nom</label>
+                        <input type="text" class="form-control" id="nom" name="nom" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="prenom" class="form-label">Prénom</label>
+                        <input type="text" class="form-control" id="prenom" name="prenom" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Adresse Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Entrer votre mot de passe</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="region" class="form-label">Entrer votre région</label>
+                        <select class="form-control" id="region" name="region">
+                            <option value="Analamanga">Analamanga</option>
+                            <option value="Vakinankaratra">Vakinankaratra</option>
+                            <option value="Itasy">Itasy</option>
+                            <option value="Bongolava">Bongolava</option>
+                            <option value="Sofia">Sofia</option>
+                            <option value="Boeny">Boeny</option>
+                            <option value="Betsiboka">Betsiboka</option>
+                            <option value="Melaky">Melaky</option>
+                            <option value="Alaotra-Mangoro">Alaotra-Mangoro</option>
+                            <option value="Atsinanana">Atsinanana</option>
+                            <option value="Analanjirofo">Analanjirofo</option>
+                            <option value="Atsimo-Atsinanana">Atsimo-Atsinanana</option>
+                            <option value="Ihorombe">Ihorombe</option>
+                            <option value="Haute Matsiatra">Haute Matsiatra</option>
+                            <option value="Amoron'i Mania">Amoron'i Mania</option>
+                            <option value="Vatovavy-Fitovinany">Vatovavy-Fitovinany</option>
+                            <option value="Atsimo-Andrefana">Atsimo-Andrefana</option>
+                            <option value="Androy">Androy</option>
+                            <option value="Anôsy">Anôsy</option>
+                            <option value="Diana">Diana</option>
+                            <option value="Sava">Sava</option>
+                            <option value="Atsinanana">Atsinanana</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="district" class="form-label">Sélectionnez votre district</label>
+                        <select class="form-control" id="district" name="district">
+                            <option value="Antananarivo I">Antananarivo I</option>
+                            <option value="Antananarivo II">Antananarivo II</option>
+                            <option value="Antananarivo III">Antananarivo III</option>
+                            <option value="Antananarivo IV">Antananarivo IV</option>
+                            <option value="Antananarivo V">Antananarivo V</option>
+                            <option value="Ambovombe">Ambovombe</option>
+                            <option value="Ambatondrazaka">Ambatondrazaka</option>
+                            <option value="Ambositra">Ambositra</option>
+                            <option value="Ambalavao">Ambalavao</option>
+                            <option value="Amboasary Sud">Amboasary Sud</option>
+                            <option value="Amparafaravola">Amparafaravola</option>
+                            <option value="Ampasimanolotra">Ampasimanolotra</option>
+                            <option value="Andapa">Andapa</option>
+                            <option value="Andramasina">Andramasina</option>
+                            <option value="Andranomanelatra">Andranomanelatra</option>
+                            <option value="Anjozorobe">Anjozorobe</option>
+                            <option value="Antalaha">Antalaha</option>
+                            <option value="Antsiranana I">Antsiranana I</option>
+                            <option value="Antsiranana II">Antsiranana II</option>
+                            <option value="Ambovombe-Androy">Ambovombe-Androy</option>
+                            <option value="Anosy">Anosy</option>
+                            <option value="Antsirabe I">Antsirabe I</option>
+                            <option value="Antsirabe II">Antsirabe II</option>
+                            <option value="Befandriana Nord">Befandriana Nord</option>
+                            <option value="Befandriana Sud">Befandriana Sud</option>
+                            <option value="Belo sur Tsiribihina">Belo sur Tsiribihina</option>
+                            <option value="Bemasoandro">Bemasoandro</option>
+                            <option value="Betafo">Betafo</option>
+                            <option value="Mahabo">Mahabo</option>
+                            <option value="Tsiroanomandidy">Tsiroanomandidy</option>
+                            <option value="Fenoarivo Atsinanana">Fenoarivo Atsinanana</option>
+                            <option value="Marolambo">Marolambo</option>
+                            <option value="Mananara Avaratra">Mananara Avaratra</option>
+                            <option value="Marovoay">Marovoay</option>
+                            <option value="Morafenobe">Morafenobe</option>
+                            <option value="Maintirano">Maintirano</option>
+                            <option value="Miandrivazo">Miandrivazo</option>
+                            <option value="Miarinarivo">Miarinarivo</option>
+                            <option value="Mampikony">Mampikony</option>
+                            <option value="Farafangana">Farafangana</option>
+                            <option value="Mananjary">Mananjary</option>
+                            <option value="Manakara">Manakara</option>
+                            <option value="Ikongo">Ikongo</option>
+                            <option value="Ikalamavony">Ikalamavony</option>
+                            <option value="Vangaindrano">Vangaindrano</option>
+                            <option value="Iakora">Iakora</option>
+                            <option value="Midongy Atsimo">Midongy Atsimo</option>
+                            <option value="Manja">Manja</option>
+                            <option value="Nosy Varika">Nosy Varika</option>
+                            <option value="Nosy Boraha">Nosy Boraha</option>
+                            <option value="Toamasina I">Toamasina I</option>
+                            <option value="Toamasina II">Toamasina II</option>
+                            <option value="Soanierana Ivongo">Soanierana Ivongo</option>
+                            <option value="Mahanoro">Mahanoro</option>
+                            <option value="Marolambo">Marolambo</option>
+                            <option value="Moramanga">Moramanga</option>
+                            <option value="Ambatondrazaka">Ambatondrazaka</option>
+                            <option value="Marofandilia">Marofandilia</option>
+                            <option value="Mampikony">Mampikony</option>
+                            <option value="Mandritsara">Mandritsara</option>
+                            <option value="Antsohihy">Antsohihy</option>
+                            <option value="Ambanja">Ambanja</option>
+                            <option value="Mitsinjo">Mitsinjo</option>
+                            <option value="Bealanana">Bealanana</option>
+                            <option value="Boriziny-Vaovao">Boriziny-Vaovao</option>
+                            <option value="Befandriana Nord">Befandriana Nord</option>
+                            <option value="Bealanana">Bealanana</option>
+                            <option value="Mahajanga I">Mahajanga I</option>
+                            <option value="Mahajanga II">Mahajanga II</option>
+                            <option value="Majunga">Majunga</option>
+                            <option value="Soalala">Soalala</option>
+                            <option value="Mampikony">Mampikony</option>
+                            <option value="Tsaratanana">Tsaratanana</option>
+                            <option value="Mitsinjo">Mitsinjo</option>
+                            <option value="Maevatanana">Maevatanana</option>
+                            <option value="Tsaratanana">Tsaratanana</option>
+                            <option value="Ambilobe">Ambilobe</option>
+                            <option value="Antsohihy">Antsohihy</option>
+                            <option value="Boriziny-Vaovao">Boriziny-Vaovao</option>
+                            <option value="Diégo-Suarez I">Diégo-Suarez I</option>
+                            <option value="Diégo-Suarez II">Diégo-Suarez II</option>
+                            <option value="Ramena">Ramena</option>
+                            <option value="Vohémar">Vohémar</option>
+                            <option value="Sambava">Sambava</option>
+                            <option value="Antalaha">Antalaha</option>
+                            <option value="Antsohihy">Antsohihy</option>
+                            <option value="Bealanana">Bealanana</option>
+                            <option value="Mandritsara">Mandritsara</option>
+                            <option value="Ambanja">Ambanja</option>
+                            <option value="Bealanana">Bealanana</option>
+                            <option value="Vohémar">Vohémar</option>
+                            <option value="Andapa">Andapa</option>
+                            <option value="Sambava">Sambava</option>
+                            <option value="Antalaha">Antalaha</option>
+                            <option value="Marovoay">Marovoay</option>
+                            <option value="Boeny">Boeny</option>
+                            <option value="Maevatanana">Maevatanana</option>
+                            <option value="Tsaratanana">Tsaratanana</option>
+                            <option value="Ambatondrazaka">Ambatondrazaka</option>
+                            <option value="Moramanga">Moramanga</option>
+                            <option value="Manjakandriana">Manjakandriana</option>
+                            <option value="Andramasina">Andramasina</option>
+                            <option value="Anjozorobe">Anjozorobe</option>
+                            <option value="Anosy">Anosy</option>
+                            <option value="Analamanga">Analamanga</option>
+                            <option value="Manjakandriana">Manjakandriana</option>
+                            <option value="Betafo">Betafo</option>
+                            <option value="Miarinarivo">Miarinarivo</option>
+                            <option value="Faratsiho">Faratsiho</option>
+                            <option value="Ampefy">Ampefy</option>
+                            <option value="Miarinarivo">Miarinarivo</option>
+                            <option value="Manandriana">Manandriana</option>
+                            <option value="Faratsiho">Faratsiho</option>
+                            <option value="Ambatolampy">Ambatolampy</option>
+                            <option value="Manandriana">Manandriana</option>
+                            <option value="Avaradrano">Avaradrano</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="adresse" class="form-label">Adresse exact</label>
+                        <input type="text" class="form-control" id="adresse" name="adresse" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="datetime" class="form-label">Date de naissance</label>
+                        <input type="date" class="form-control" id="datetime" name="datetime" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="sexe" class="form-label">Sexe</label>
+                        <select class="form-control" id="sexe" name="sexe">
+                            <option value="Homme">Homme</option>
+                            <option value="Femme">Femme</option>
+                        </select>
+
+                    </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="secteur" class="form-label">Secteur</label>
+                    <select class="form-control" id="secteur" name="secteur">
+                        <option value="Primaire">Primaire</option>
+                        <option value="Secondaire">Secondaire</option>
+                        <option value="Tertiaire">Tertiaire</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="domaine" class="form-label">Domaine</label>
+                    <select class="form-control" id="domaine" name="domaine">
+                        <option value="Agriculture ">Agriculture </option>
+                        <option value="Élevage ">Élevage </option>
+                        <option value="Silviculture ">Silviculture </option>
+                        <option value="Pêche ">Pêche </option>
+                        <option value="Minéraux ">Minéraux </option>
+                        <option value="Énergie ">Énergie </option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="theme" class="form-label">Thèmatique</label>
+                    <input type="text" class="form-control" id="theme" name="theme" required>
+                </div>
+                <div class="mb-3">
+                    <label for="activite" class="form-label">Occupation</label>
+                    <input type="text" class="form-control" id="activite" name="activite" required>
+                </div>
+                <div class="mb-3">
+                    <label for="lieux" class="form-label">Lieux Souhaité</label>
+                    <input type="text" class="form-control" id="lieux" name="lieux" required>
+                </div>
+                <div class="mb-3">
+                    <label for="diplome" class="form-label">Diplôme</label>
+                    <input type="text" class="form-control" id="diplome" name="diplome" required>
+                </div>
+                <div class="mb-3">
+                    <label for="telephone" class="form-label">Téléphone</label>
+                    <input type="text" class="form-control" id="telephone" name="telephone" required>
+                </div>
+                <div class="mb-3">
+                    <label for="telephone2" class="form-label">Téléphone (Facultatif)</label>
+                    <input type="text" class="form-control" id="telephone2" name="telephone2" required>
+                </div>
+                <div class="mb-3">
+                    <label for="typeFormation" class="form-label">Type de Formation</label>
+                    <select class="form-control" id="typeFormation" name="typeFormation">
+                        <option value="Présentielle">Présentielle</option>
+                        <option value="en ligne">en ligne</option>
+                        <option value="Les 2 en même temps">Les 2 en même temps</option>
+                    </select>
+                </div>
+            </div>
+            <!--
+            <div class="mb-3">
+                <label for="region" class="form-label">Région</label>
+                <input type="text" class="form-control" id="region" name="region" required>
+            </div>-->
+            <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-dark">Inscrire</button>
+            </div>
+            </form>
+        </div>
+    </div>
+
+
+    <br> <br>
+
+    <footer class="footer">
+        <div class="footer-info">
+            <i class="bi bi-whatsapp"></i> +261 34 95 639 06
+            <span style="margin-left: 80px;"></span>
+        </div>
+        <div class="footer-contact">
+            <i class="bi bi-envelope"></i> eamsiegetana@gmail.com
+            <span style="margin-left: 80px;"></span>
+            <i class="bi bi-geo-alt"></i> Lot 6A Ambohibao 101 - Antehiroka Madagascar
+            <span style="margin-left: 80px;"></span>
+        </div>
+        <div class="footer-social">
+            <p class="d-inline">Suivre nous sur :</p>
+            <span style="margin-left: 20px;"></span>
+            <a class="d-inline" href="#pageFacebook"><i class="bi bi-facebook"></i> </a> <span style="margin-left: 10px;"></span>
+            <a class="d-inline" href="https://www.linkedin.com/in/entreprendre-a-madagascar-a80860263"><i class="bi bi-linkedin"></i> </a><span style="margin-left: 10px;"></span>
+            <a class="d-inline" href="https://twitter.com/YourTwitter"><i class="bi bi-twitter"></i> </a><span style="margin-left: 10px;"></span>
+            <a class="d-inline" href="https://www.entreprendre-a-madagascar.business.site"><i class="bi bi-globe"></i></a><span style="margin-left: 10px;"></span>
+        </div><br><br><br>
+        <hr style="width: 50%; margin: 0 auto;"><br>
+        <p class="footer-copyright">Entreprendre à Madagascar 2023 © Tous droits réservés</p>
+    </footer>
+
+</body>
+
+</html>

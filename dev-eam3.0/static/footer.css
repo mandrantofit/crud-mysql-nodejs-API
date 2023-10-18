@@ -1,0 +1,82 @@
+/* Footer */
+
+.footer {
+    background-color: #012539;
+    color: #ffffff;
+    font-size: 14px;
+    text-align: center;
+    padding: 20px 0;
+    /* Remplacer la valeur fixe de la largeur par une valeur relative */
+    width: 100%;
+}
+
+.footer div {
+    display: inline;
+    margin: 10px;
+}
+
+.footer-info,
+.footer-contact,
+.footer-social {
+    margin-right: 20px;
+    /* Ajoute de l'espace entre les éléments */
+}
+
+.footer-info i,
+.footer-contact i {
+    font-size: 14px;
+}
+
+.footer-contact i,
+.footer-social a {
+    margin-right: 5px;
+    /* Ajoute de l'espace entre les icônes et les textes */
+}
+
+.footer-social a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.footer-social a:hover {
+    color: #f5f5f5;
+}
+
+
+/* Icônes Bootstrap */
+
+.bi-facebook,
+.bi-twitter,
+.bi-link-45deg,
+.bi-linkedin,
+.bi-envelope,
+.bi-globe,
+.bi-phone,
+.bi-geo-alt,
+.bi-calendar {
+    font-size: 16px;
+    color: #ffffff;
+}
+
+.footer-copyright {
+    font-size: 14px;
+}
+
+
+/* Media queries */
+
+@media (max-width: 768px) {
+    /* Pour les écrans de largeur inférieure à 768px, mettre le footer en position fixe en bas de la page */
+    .footer {
+        bottom: 0;
+        width: 100%;
+        overflow: scroll;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* Pour les écrans de largeur tablette (entre 769px et 1024px), aligner le footer au centre de la page */
+    .footer {
+        margin: 0 auto;
+    }
+}

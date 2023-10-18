@@ -1,0 +1,21 @@
+header.fixed-top {
+    margin-top: -20px;
+    /* Vous pouvez ajuster la valeur de pixels selon vos besoins */
+}
+
+.nav-link {
+    color: #010122d5 !important;
+}
+
+.container {
+    margin: 5px;
+}
+
+.navbar-nav {
+    justify-content: space-between;
+}
+
+.navbar-brand,
+.navbar-toggler {
+    order: -1;
+}

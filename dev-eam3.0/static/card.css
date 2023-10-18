@@ -1,0 +1,51 @@
+/* Style de base pour la carte de connexion */
+
+.login-card {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    color: #000041ec;
+}
+
+.card-title {
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.navbar-brand img {
+    width: 100%;
+    max-width: 90px;
+}
+
+
+/* Appliquer une marge de 10% à gauche et à droite pour les écrans de largeur inférieure à 768px (téléphones) */
+
+@media (max-width: 768px) {
+    .login-card {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+}
+
+
+/* Appliquer une marge de 300px à gauche pour les écrans de largeur tablette (entre 769px et 1024px) */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .login-card {
+        margin-left: 250px;
+    }
+}
+
+
+/* Appliquer une marge de 500px à gauche pour les écrans de largeur supérieure à 1024px (desktop) */
+
+@media (min-width: 1025px) {
+    .login-card {
+        margin-left: 450px;
+    }
+}

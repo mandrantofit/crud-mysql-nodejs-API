@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='card.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='table.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='header.css') }}">
+    <style>
+        header.fixed-top {
+            margin-top: -20px;
+            /* Vous pouvez ajuster la valeur de pixels selon vos besoins */
+        }
+        
+        .nav-link {
+            color: #010122d5 !important;
+        }
+        
+        .container {
+            margin: 5px;
+        }
+        
+        .navbar-nav {
+            justify-content: space-between;
+        }
+    </style>
+    <title></title>
+</head>
+
+<body>
+
+    <header class="fixed-top bg-white">
+
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+
+                <ul class="navbar-nav ms-auto align-items-end">
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="#">
+                            <img src="../static/logo.png" alt="Logo" srcset="">
+                        </a>
+                    </li>
+                </ul>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold accordion-item" href="{{ url_for('liste_jeunes') }}">
+                                <i class="bi bi-person-workspace me-2"></i> Jeunes
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold" href="#">
+                                <i class="bi bi-mortarboard  me-2"></i> Formateurs
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold" href="#">
+                                <i class="bi bi-book  me-2"></i> Formations
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold" href="#">
+                                <i class="bi bi-info-circle me-2"></i> A propos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold" href="#">
+                                <i class="bi bi-question-circle me-2"></i> Aide
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold" href="{{ url_for('deconnection') }}" style="margin-right: -250px;">
+                                <i class="bi bi-person me-2"></i> Se deconnecter
+                            </a>
+                        </li>
+                    </ul>
+
+
+                </div>
+
+            </div>
+        </nav>
+
+    </header> <br><br><br><br><br><br> {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %}
+    <div id="flash-messages">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}" style="text-align: center;">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %} {% endwith %}
+    <div class="content">
+        <div class="d-flex justify-content-between  align-items-start mb-3 mx-2">
+            <div class="col-1 mx-2 m-0">
+                <select class="form-control" id="region" name="region">
+                    <option value="Analamanga">Analamanga</option>
+                    <option value="Vakinankaratra">Vakinankaratra</option>
+                    <option value="Itasy">Itasy</option>
+                    <option value="Bongolava">Bongolava</option>
+                    <option value="Sofia">Sofia</option>
+                    <option value="Boeny">Boeny</option>
+                    <option value="Betsiboka">Betsiboka</option>
+                    <option value="Melaky">Melaky</option>
+                    <option value="Alaotra-Mangoro">Alaotra-Mangoro</option>
+                    <option value="Atsinanana">Atsinanana</option>
+                    <option value="Analanjirofo">Analanjirofo</option>
+                    <option value="Atsimo-Atsinanana">Atsimo-Atsinanana</option>
+                    <option value="Ihorombe">Ihorombe</option>
+                    <option value="Haute Matsiatra">Haute Matsiatra</option>
+                    <option value="Amoron'i Mania">Amoron'i Mania</option>
+                    <option value="Vatovavy-Fitovinany">Vatovavy-Fitovinany</option>
+                    <option value="Atsimo-Andrefana">Atsimo-Andrefana</option>
+                    <option value="Androy">Androy</option>
+                    <option value="Anôsy">Anôsy</option>
+                    <option value="Diana">Diana</option>
+                    <option value="Sava">Sava</option>
+                    <option value="Atsinanana">Atsinanana</option>
+                </select>
+            </div>
+            <div class="">
+                <select class=" form-control " style="margin-left: -500%; " id="triFormation " name="triFormation ">
+                    {% for formation in formations %}
+                    <option  value="{{ formation }}" style="text-align: center; ">{{ formation }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div style="margin-right: 20px; " class="search-bar d-flex align-items-center ">
+                <form action="{{ url_for( 'liste_jeunes_recherche') }} " method="GET ">
+                    <div class="input-group ">
+                        <input type="text " class="form-control " id="search " name="search_term " placeholder="Saisissez votre recherche ">
+                        <button type="submit " class="input-group-text "><i class="bi bi-search "></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-1 mx-2">
+            <a style="margin-left: 0.5em; width: 115px; " href="{{ url_for( 'inscription_jeune') }} " class=" btn btn-outline-dark "><i class="bi bi-plus "></i>inscription</a>
+        </div>
+        <div class="table-container mx-2 ">
+            <div class="table-responsive mx-2 ">
+                <table class="table-smooth ">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Région</th>
+                            <th>Thematique</th>
+                            <th>Téléphone</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for table in jeunes %}
+                        <tr>
+                            <td>{{ table[0]}}</td>
+                            <td>{{ table[1] }}</td>
+                            <td>{{ table[2] }}</td>
+                            <td>{{ table[3] }}</td>
+                            <td>{{ table[4] }}</td>
+                            <td>{{ table[5] }}</td>
+                            <td>
+                                <a href="{{ url_for( 'vue_jeune_detail', jeune_id=table[0]) }} " class="btn btn-success "><i class="bi bi-search "></i></a>
+                                <a href="{{ url_for( 'update_jeune', jeune_id=table[0]) }} " class="btn btn-primary "><i class="bi bi-pencil-fill "></i></a>
+                                <a href="{{ url_for( 'delete_jeune', jeune_id=table[0]) }} " class="btn btn-danger " onclick="return confirm( 'Êtes-vous sûr de vouloir supprimer ce jeune ?'); "><i class="bi bi-trash-fill "></i></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> <br> <br>
+
+    <footer class="footer ">
+        <div class="footer-info ">
+            <i class="bi bi-whatsapp "></i> +261 34 95 639 06
+            <span style="margin-left: 80px; "></span>
+        </div>
+        <div class="footer-contact ">
+            <i class="bi bi-envelope "></i> eamsiegetana@gmail.com
+            <span style="margin-left: 80px; "></span>
+            <i class="bi bi-geo-alt "></i> Lot 6A Ambohibao 101 - Antehiroka Madagascar
+            <span style="margin-left: 80px; "></span>
+        </div>
+        <div class="footer-social ">
+            <p class="d-inline ">Suivre nous sur :</p>
+            <span style="margin-left: 20px; "></span>
+            <a class="d-inline " href="#pageFacebook "><i class="bi bi-facebook "></i> </a> <span style="margin-left: 10px; "></span>
+            <a class="d-inline " href="https://www.linkedin.com/in/entreprendre-a-madagascar-a80860263 "><i class="bi bi-linkedin "></i> </a><span style="margin-left: 10px; "></span>
+            <a class="d-inline " href="https://twitter.com/YourTwitter "><i class="bi bi-twitter "></i> </a><span style="margin-left: 10px; "></span>
+            <a class="d-inline " href="https://www.entreprendre-a-madagascar.business.site "><i class="bi bi-globe "></i></a><span style="margin-left: 10px; "></span>
+        </div><br><br><br>
+        <hr style="width: 50%; margin: 0 auto; "><br>
+        <p class="footer-copyright ">Entreprendre à Madagascar 2023 © Tous droits réservés</p>
+    </footer>
+
+    <script>
+        function adjustFooter() {
+            // Obtenir le nombre de lignes du tableau
+            const tableRows = document.querySelector('table').rows.length;
+
+            if (tableRows < 4) {
+                document.querySelector('.footer').style.bottom = '0';
+                document.querySelector('.footer').style.position = 'fixed';
+                console.log(tableRows + " < 4 ");
+            } else {
+                // Sinon, définir la position du footer à "relative "
+                document.querySelector('.footer').style.position = 'relative';
+                console.log(tableRows + "> 4");
+            }
+        }
+
+        // Appeler la fonction adjustFooter() au chargement de la page
+        window.addEventListener('load', adjustFooter);
+
+        // Appeler la fonction adjustFooter() après que le tableau a été modifié
+        document.querySelector('table').addEventListener('change', adjustFooter);
+    </script>
+
+
+</body>
+
+</html>

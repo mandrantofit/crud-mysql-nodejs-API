@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='card.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='table.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='header.css') }}">
+    <style>
+        .nav-link {
+            color: #010122d5 !important;
+        }
+        
+        .container {
+            margin: 5px;
+        }
+        
+        .navbar-nav {
+            justify-content: space-between;
+        }
+    </style>
+
+
+    <title></title>
+</head>
+
+
+<body>
+
+    <header class="fixed-top bg-white">
+
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+
+                <ul class="navbar-nav ms-auto align-items-end">
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="#">
+                            <img src="../static/logo.png" alt="Logo" srcset="">
+                        </a>
+                    </li>
+                </ul>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold accordion-item" href="{{ url_for('liste_jeunes') }}">
+                                <i class="bi bi-person-workspace me-2"></i> Jeunes
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold" href="#">
+                                <i class="bi bi-mortarboard  me-2"></i> Formateurs
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold" href="#">
+                                <i class="bi bi-book  me-2"></i> Formations
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold" href="#">
+                                <i class="bi bi-info-circle me-2"></i> A propos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold" href="#">
+                                <i class="bi bi-question-circle me-2"></i> Aide
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold" href="{{ url_for('deconnection') }}" style="margin-right: -250px;">
+                                <i class="bi bi-person me-2"></i> Se deconnecter
+                            </a>
+                        </li>
+                    </ul>
+
+
+                </div>
+
+            </div>
+        </nav>
+
+    </header> <br><br><br> {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %}
+    <div id="flash-messages">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}" style="text-align: center;">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %} {% endwith %}
+    <!--
+    <div class="container row mx-auto my-5">
+        <h4 class="text-center">Modification Jeune</h4>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form method="POST" action="{{ url_for('update_jeune', jeune_id=jeune[0]) }}">
+                    <div class="mb-3">
+                        <label for="nom" class="form-label">Nom</label>
+                        <input type="text" class="form-control" id="nom" name="nom" value="{{ jeune[1] }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="prenom" class="form-label">Prénom</label>
+                        <input type="text" class="form-control" id="prenom" name="prenom" value="{{ jeune[2] }}">
+                    </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="formation" class="form-label">Formation</label>
+                    <input type="text" class="form-control" id="formation" name="formation" value="{{ jeune[5] }}">
+                </div>
+                <div class="mb-3">
+                    <label for="telephone" class="form-label">Téléphone</label>
+                    <input type="text" class="form-control" id="telephone" name="telephone" value="{{ jeune[4] }}">
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="region" class="form-label">Région</label>
+                <input type="text" class="form-control" id="region" name="region" value="{{ jeune[3] }}">
+            </div>
+            <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-dark">Enregistrer</button>
+                <a href="{{ url_for('liste_jeunes') }}" class="btn btn-dark">Retour</a>
+            </div>
+            </form>
+        </div>
+    </div>
+    </div> -->
+    <div class="container row mx-auto my-5">
+        <h4 class="text-center" style="margin-bottom: 2%;">Modification Jeune</h4>
+        <div class="row justify-content-center" style=" margin-left: 3%;">
+            <div class="col-md-6">
+                <form method="POST" action="{{ url_for('update_jeune', jeune_id=jeune[0]) }}">
+                    <div class="mb-3">
+                        <label for="nom" class="form-label">Nom</label>
+                        <input type="text" class="form-control" id="nom" name="nom" value="{{ jeune[1] }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="prenom" class="form-label">Prénom</label>
+                        <input type="text" class="form-control" id="prenom" name="prenom" value="{{ jeune[2] }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Adresse Email</label>
+                        <input type="email" class="form-control" id="email" name="email" value="{{ jeune[3] }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Entrer votre nouvelle mot de passe</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="region" class="form-label">Entrer votre région</label>
+                        <select class="form-control" id="region" name="region">
+                            <option value=" Analamanga " {% if jeune[5] == "Analamanga " %}selected{% endif %}>Analamanga</option>
+                            <option value="Vakinankaratra "{% if jeune[5] == "Vakinankaratra " %}selected{% endif %} >Vakinankaratra</option>
+                            <option value="Itasy " {% if jeune[5] == "Itasy " %}selected{% endif %}>Itasy</option>
+                            <option value="Bongolava "{% if jeune[5] == "Bongolava " %}selected{% endif %} >Bongolava</option>
+                            <option value="Sofia " {% if jeune[5] == "Sofia " %}selected{% endif %}>Sofia</option>
+                            <option value="Boeny " {% if jeune[5] == "Boeny " %}selected{% endif %}>Boeny</option>
+                            <option value="Betsiboka "{% if jeune[5] == "Betsiboka " %}selected{% endif %}>Betsiboka</option>
+                            <option value="Melaky "{% if jeune[5] == "Melaky " %}selected{% endif %}>Melaky</option>
+                            <option value="Alaotra-Mangoro "{% if jeune[5] == "Alaotra-Mangoro " %}selected{% endif %}>Alaotra-Mangoro</option>
+                            <option value="Atsinanana "{% if jeune[5] == "Atsinanana " %}selected{% endif %}>Atsinanana</option>
+                            <option value="Analanjirofo "{% if jeune[5] == "Analanjirofo " %}selected{% endif %}>Analanjirofo</option>
+                            <option value="Atsimo-Atsinanana "{% if jeune[5] == "Atsimo-Atsinanana " %}selected{% endif %}>Atsimo-Atsinanana</option>
+                            <option value="Ihorombe "{% if jeune[5] == "Ihorombe " %}selected{% endif %}>Ihorombe</option>
+                            <option value="Haute Matsiatra "{% if jeune[5] == "Haute Matsiatra " %}selected{% endif %}>Haute Matsiatra</option>
+                            <option value="Amoron 'i Mania"{% if jeune[5] == "Amoron'i Mania " %}selected{% endif %}>Amoron'i Mania</option>
+                            <option value="Vatovavy-Fitovinany "{% if jeune[5] == "Vatovavy-Fitovinany " %}selected{% endif %}>Vatovavy-Fitovinany</option>
+                            <option value="Atsimo-Andrefana "{% if jeune[5] == "Atsimo-Andrefana " %}selected{% endif %}>Atsimo-Andrefana</option>
+                            <option value="Androy "{% if jeune[5] == "Androy " %}selected{% endif %}>Androy</option>
+                            <option value="Anôsy "{% if jeune[5] == "Anôsy " %}selected{% endif %}>Anôsy</option>
+                            <option value="Diana "{% if jeune[5] == "Diana " %}selected{% endif %}>Diana</option>
+                            <option value="Sava "{% if jeune[5] == "Sava " %}selected{% endif %}>Sava</option>
+                            <option value="Atsinanana "{% if jeune[5] == "Atsinanana " %}selected{% endif %}>Atsinanana</option>
+                        </select>
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="district " class="form-label ">Sélectionnez votre district</label>
+                        <select class="form-control" id="district" name="district">
+                            <option value="Antananarivo I" {% if jeune[6] == "Antananarivo I" %}selected{% endif %}>Antananarivo I</option>
+                            <option value="Antananarivo II" {% if jeune[6] == "Antananarivo II" %}selected{% endif %}>Antananarivo II</option>
+                            <option value="Antananarivo III" {% if jeune[6] == "Antananarivo III" %}selected{% endif %}>Antananarivo III</option>
+                            <option value="Antananarivo IV" {% if jeune[6] == "Antananarivo IV" %}selected{% endif %}>Antananarivo IV</option>
+                            <option value="Antananarivo V" {% if jeune[6] == "Antananarivo V" %}selected{% endif %}>Antananarivo V</option>
+                            <option value="Ambovombe" {% if jeune[6] == "Ambovombe" %}selected{% endif %}>Ambovombe</option>
+                            <option value="Ambatondrazaka" {% if jeune[6] == "Ambatondrazaka" %}selected{% endif %}>Ambatondrazaka</option>
+                            <option value="Ambositra" {% if jeune[6] == "Ambositra" %}selected{% endif %}>Ambositra</option>
+                            <option value="Ambalavao" {% if jeune[6] == "Ambalavao" %}selected{% endif %}>Ambalavao</option>
+                            <option value="Amboasary Sud" {% if jeune[6] == "Amboasary Sud" %}selected{% endif %}>Amboasary Sud</option>
+                            <option value="Amparafaravola" {% if jeune[6] == "Amparafaravola" %}selected{% endif %}>Amparafaravola</option>
+                            <option value="Ampasimanolotra" {% if jeune[6] == "Ampasimanolotra" %}selected{% endif %}>Ampasimanolotra</option>
+                            <option value="Andapa" {% if jeune[6] == "Andapa" %}selected{% endif %}>Andapa</option>
+                            <option value="Andramasina" {% if jeune[6] == "Andramasina" %}selected{% endif %}>Andramasina</option>
+                            <option value="Andranomanelatra" {% if jeune[6] == "Andranomanelatra" %}selected{% endif %}>Andranomanelatra</option>
+                            <option value="Anjozorobe" {% if jeune[6] == "Anjozorobe" %}selected{% endif %}>Anjozorobe</option>
+                            <option value="Antalaha" {% if jeune[6] == "Antalaha" %}selected{% endif %}>Antalaha</option>
+                            <option value="Antsiranana I" {% if jeune[6] == "Antsiranana I" %}selected{% endif %}>Antsiranana I</option>
+                            <option value="Antsiranana II" {% if jeune[6] == "Antsiranana II" %}selected{% endif %}>Antsiranana II</option>
+                            <option value="Ambovombe-Androy" {% if jeune[6] == "Ambovombe-Androy" %}selected{% endif %}>Ambovombe-Androy</option>
+                            <option value="Anosy" {% if jeune[6] == "Anosy" %}selected{% endif %}>Anosy</option>
+                            <option value="Antsirabe I" {% if jeune[6] == "Antsirabe I" %}selected{% endif %}>Antsirabe I</option>
+                            <option value="Antsirabe II" {% if jeune[6] == "Antsirabe II" %}selected{% endif %}>Antsirabe II</option>
+                            <option value="Befandriana Nord" {% if jeune[6] == "Befandriana Nord" %}selected{% endif %}>Befandriana Nord</option>
+                            <option value="Befandriana Sud" {% if jeune[6] == "Befandriana Sud" %}selected{% endif %}>Befandriana Sud</option>
+                            <option value="Belo sur Tsiribihina" {% if jeune[6] == "Belo sur Tsiribihina" %}selected{% endif %}>Belo sur Tsiribihina</option>
+                            <option value="Bemasoandro" {% if jeune[6] == "Bemasoandro" %}selected{% endif %}>Bemasoandro</option>
+                            <option value="Betafo" {% if jeune[6] == "Betafo" %}selected{% endif %}>Betafo</option>
+                            <option value="Mahabo" {% if jeune[6] == "Mahabo" %}selected{% endif %}>Mahabo</option>
+                            <option value="Tsiroanomandidy" {% if jeune[6] == "Tsiroanomandidy" %}selected{% endif %}>Tsiroanomandidy</option>
+                            <option value="Fenoarivo Atsinanana" {% if jeune[6] == "Fenoarivo Atsinanana" %}selected{% endif %}>Fenoarivo Atsinanana</option>
+                            <option value="Marolambo" {% if jeune[6] == "Marolambo" %}selected{% endif %}>Marolambo</option>
+                            <option value="Mananara Avaratra" {% if jeune[6] == "Mananara Avaratra" %}selected{% endif %}>Mananara Avaratra</option>
+                            <option value="Marovoay" {% if jeune[6] == "Marovoay" %}selected{% endif %}>Marovoay</option>
+                            <option value="Morafenobe" {% if jeune[6] == "Morafenobe" %}selected{% endif %}>Morafenobe</option>
+                            <option value="Maintirano" {% if jeune[6] == "Maintirano" %}selected{% endif %}>Maintirano</option>
+                            <option value="Miandrivazo" {% if jeune[6] == "Miandrivazo" %}selected{% endif %}>Miandrivazo</option>
+                            <option value="Miarinarivo" {% if jeune[6] == "Miarinarivo" %}selected{% endif %}>Miarinarivo</option>
+                            <option value="Mampikony" {% if jeune[6] == "Mampikony" %}selected{% endif %}>Mampikony</option>
+                            <option value="Farafangana" {% if jeune[6] == "Farafangana" %}selected{% endif %}>Farafangana</option>
+                            <option value="Mananjary" {% if jeune[6] == "Mananjary" %}selected{% endif %}>Mananjary</option>
+                            <option value="Manakara" {% if jeune[6] == "Manakara" %}selected{% endif %}>Manakara</option>
+                            <option value="Ikongo" {% if jeune[6] == "Ikongo" %}selected{% endif %}>Ikongo</option>
+                            <option value="Ikalamavony" {% if jeune[6] == "Ikalamavony" %}selected{% endif %}>Ikalamavony</option>
+                            <option value="Vangaindrano" {% if jeune[6] == "Vangaindrano" %}selected{% endif %}>Vangaindrano</option>
+                            <option value="Iakora" {% if jeune[6] == "Iakora" %}selected{% endif %}>Iakora</option>
+                            <option value="Midongy Atsimo" {% if jeune[6] == "Midongy Atsimo" %}selected{% endif %}>Midongy Atsimo</option>
+                            <option value="Manja" {% if jeune[6] == "Manja" %}selected{% endif %}>Manja</option>
+                            <option value="Nosy Varika" {% if jeune[6] == "Nosy Varika" %}selected{% endif %}>Nosy Varika</option>
+                            <option value="Nosy Boraha" {% if jeune[6] == "Nosy Boraha" %}selected{% endif %}>Nosy Boraha</option>
+                            <option value="Toamasina I" {% if jeune[6] == "Toamasina I" %}selected{% endif %}>Toamasina I</option>
+                            <option value="Toamasina II" {% if jeune[6] == "Toamasina II" %}selected{% endif %}>Toamasina II</option>
+                            <option value="Soanierana Ivongo" {% if jeune[6] == "Soanierana Ivongo" %}selected{% endif %}>Soanierana Ivongo</option>
+                            <option value="Mahanoro" {% if jeune[6] == "Mahanoro" %}selected{% endif %}>Mahanoro</option>
+                            <option value="Marolambo" {% if jeune[6] == "Marolambo" %}selected{% endif %}>Marolambo</option>
+                            <option value="Moramanga" {% if jeune[6] == "Moramanga" %}selected{% endif %}>Moramanga</option>
+                            <option value="Ambatondrazaka" {% if jeune[6] == "Ambatondrazaka" %}selected{% endif %}>Ambatondrazaka</option>
+                            <option value="Marofandilia" {% if jeune[6] == "Marofandilia" %}selected{% endif %}>Marofandilia</option>
+                            <option value="Mampikony" {% if jeune[6] == "Mampikony" %}selected{% endif %}>Mampikony</option>
+                            <option value="Mandritsara" {% if jeune[6] == "Mandritsara" %}selected{% endif %}>Mandritsara</option>
+                            <option value="Antsohihy" {% if jeune[6] == "Antsohihy" %}selected{% endif %}>Antsohihy</option>
+                            <option value="Ambanja" {% if jeune[6] == "Ambanja" %}selected{% endif %}>Ambanja</option>
+                            <option value="Mitsinjo" {% if jeune[6] == "Mitsinjo" %}selected{% endif %}>Mitsinjo</option>
+                            <option value="Bealanana" {% if jeune[6] == "Bealanana" %}selected{% endif %}>Bealanana</option>
+                            <option value="Boriziny-Vaovao" {% if jeune[6] == "Boriziny-Vaovao" %}selected{% endif %}>Boriziny-Vaovao</option>
+                            <option value="Befandriana Nord" {% if jeune[6] == "Befandriana Nord" %}selected{% endif %}>Befandriana Nord</option>
+                            <option value="Bealanana" {% if jeune[6] == "Bealanana" %}selected{% endif %}>Bealanana</option>
+                            <option value="Mahajanga I" {% if jeune[6] == "Mahajanga I" %}selected{% endif %}>Mahajanga I</option>
+                            <option value="Mahajanga II" {% if jeune[6] == "Mahajanga II" %}selected{% endif %}>Mahajanga II</option>
+                            <option value="Majunga" {% if jeune[6] == "Majunga" %}selected{% endif %}>Majunga</option>
+                            <option value="Soalala" {% if jeune[6] == "Soalala" %}selected{% endif %}>Soalala</option>
+                            <option value="Mampikony" {% if jeune[6] == "Mampikony" %}selected{% endif %}>Mampikony</option>
+                            <option value="Tsaratanana" {% if jeune[6] == "Tsaratanana" %}selected{% endif %}>Tsaratanana</option>
+                            <option value="Mitsinjo" {% if jeune[6] == "Mitsinjo" %}selected{% endif %}>Mitsinjo</option>
+                            <option value="Maevatanana" {% if jeune[6] == "Maevatanana" %}selected{% endif %}>Maevatanana</option>
+                            <option value="Tsaratanana" {% if jeune[6] == "Tsaratanana" %}selected{% endif %}>Tsaratanana</option>
+                            <option value="Ambilobe" {% if jeune[6] == "Ambilobe" %}selected{% endif %}>Ambilobe</option>
+                            <option value="Antsohihy" {% if jeune[6] == "Antsohihy" %}selected{% endif %}>Antsohihy</option>
+                            <option value="Boriziny-Vaovao" {% if jeune[6] == "Boriziny-Vaovao" %}selected{% endif %}>Boriziny-Vaovao</option>
+                            <option value="Diégo-Suarez I" {% if jeune[6] == "Diégo-Suarez I" %}selected{% endif %}>Diégo-Suarez I</option>
+                            <option value="Diégo-Suarez II" {% if jeune[6] == "Diégo-Suarez II" %}selected{% endif %}>Diégo-Suarez II</option>
+                            <option value="Ramena" {% if jeune[6] == "Ramena" %}selected{% endif %}>Ramena</option>
+                            <option value="Vohémar" {% if jeune[6] == "Vohémar" %}selected{% endif %}>Vohémar</option>
+                            <option value="Sambava" {% if jeune[6] == "Sambava" %}selected{% endif %}>Sambava</option>
+                            <option value="Antalaha" {% if jeune[6] == "Antalaha" %}selected{% endif %}>Antalaha</option>
+                            <option value="Antsohihy" {% if jeune[6] == "Antsohihy" %}selected{% endif %}>Antsohihy</option>
+                            <option value="Bealanana" {% if jeune[6] == "Bealanana" %}selected{% endif %}>Bealanana</option>
+                            <option value="Mandritsara" {% if jeune[6] == "Mandritsara" %}selected{% endif %}>Mandritsara</option>
+                            <option value="Ambanja" {% if jeune[6] == "Ambanja" %}selected{% endif %}>Ambanja</option>
+                            <option value="Bealanana" {% if jeune[6] == "Bealanana" %}selected{% endif %}>Bealanana</option>
+                            <option value="Vohémar" {% if jeune[6] == "Vohémar" %}selected{% endif %}>Vohémar</option>
+                            <option value="Andapa" {% if jeune[6] == "Andapa" %}selected{% endif %}>Andapa</option>
+                            <option value="Sambava" {% if jeune[6] == "Sambava" %}selected{% endif %}>Sambava</option>
+                            <option value="Antalaha" {% if jeune[6] == "Antalaha" %}selected{% endif %}>Antalaha</option>
+                            <option value="Marovoay" {% if jeune[6] == "Marovoay" %}selected{% endif %}>Marovoay</option>
+                            <option value="Boeny" {% if jeune[6] == "Boeny" %}selected{% endif %}>Boeny</option>
+                            <option value="Maevatanana" {% if jeune[6] == "Maevatanana" %}selected{% endif %}>Maevatanana</option>
+                            <option value="Tsaratanana" {% if jeune[6] == "Tsaratanana" %}selected{% endif %}>Tsaratanana</option>
+                            <option value="Ambatondrazaka" {% if jeune[6] == "Ambatondrazaka" %}selected{% endif %}>Ambatondrazaka</option>
+                            <option value="Moramanga" {% if jeune[6] == "Moramanga" %}selected{% endif %}>Moramanga</option>
+                            <option value="Manjakandriana" {% if jeune[6] == "Manjakandriana" %}selected{% endif %}>Manjakandriana</option>
+                            <option value="Andramasina" {% if jeune[6] == "Andramasina" %}selected{% endif %}>Andramasina</option>
+                            <option value="Anjozorobe" {% if jeune[6] == "Anjozorobe" %}selected{% endif %}>Anjozorobe</option>
+                            <option value="Anosy" {% if jeune[6] == "Anosy" %}selected{% endif %}>Anosy</option>
+                            <option value="Analamanga" {% if jeune[6] == "Analamanga" %}selected{% endif %}>Analamanga</option>
+                            <option value="Manjakandriana" {% if jeune[6] == "Manjakandriana" %}selected{% endif %}>Manjakandriana</option>
+                            <option value="Betafo" {% if jeune[6] == "Betafo" %}selected{% endif %}>Betafo</option>
+                            <option value="Miarinarivo" {% if jeune[6] == "Miarinarivo" %}selected{% endif %}>Miarinarivo</option>
+                            <option value="Faratsiho" {% if jeune[6] == "Faratsiho" %}selected{% endif %}>Faratsiho</option>
+                            <option value="Ampefy" {% if jeune[6] == "Ampefy" %}selected{% endif %}>Ampefy</option>
+                            <option value="Miarinarivo" {% if jeune[6] == "Miarinarivo" %}selected{% endif %}>Miarinarivo</option>
+                            <option value="Manandriana" {% if jeune[6] == "Manandriana" %}selected{% endif %}>Manandriana</option>
+                            <option value="Faratsiho" {% if jeune[6] == "Faratsiho" %}selected{% endif %}>Faratsiho</option>
+                            <option value="Ambatolampy" {% if jeune[6] == "Ambatolampy" %}selected{% endif %}>Ambatolampy</option>
+                            <option value="Manandriana" {% if jeune[6] == "Manandriana" %}selected{% endif %}>Manandriana</option>
+                            <option value="Avaradrano" {% if jeune[6] == "Avaradrano" %}selected{% endif %}>Avaradrano</option>
+                        </select>
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="adresse " class="form-label ">Adresse exact</label>
+                        <input type="text " class="form-control " id="adresse" name="adresse" value="{{ jeune[7] }} " required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="datetime" class="form-label">Date de naissance</label>
+                        <input type="date" class="form-control" id="datetime" name="datetime" value="{{ jeune[4] }}" required>
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="sexe" class="form-label ">Sexe</label>
+                        <select class="form-control " id="sexe" name="sexe">
+                            <option value="Homme ">Homme</option>
+                            <option value="Femme ">Femme</option>
+                        </select>
+
+                    </div>
+            </div>
+            <div class="col-md-6 ">
+                <div class="mb-3 ">
+                    <label for="secteur" class="form-label ">Secteur</label>
+                    <select class="form-control " id="secteur" name="secteur">
+                        <option value="Primaire ">Primaire</option>
+                        <option value="Secondaire ">Secondaire</option>
+                        <option value="Tertiaire ">Tertiaire</option>
+                    </select>
+                </div>
+                <div class="mb-3 ">
+                    <label for="domaine" class="form-label ">Domaine</label>
+                    <select class="form-control " id="domaine" name="domaine">
+                        <option value="Agriculture ">Agriculture </option>
+                        <option value="Élevage ">Élevage </option>
+                        <option value="Silviculture ">Silviculture </option>
+                        <option value="Pêche ">Pêche </option>
+                        <option value="Minéraux ">Minéraux </option>
+                        <option value="Énergie ">Énergie </option>
+                    </select>
+                </div>
+                <div class="mb-3 ">
+                    <label for="theme" class="form-label ">Thèmatique</label>
+                    <input type="text" class="form-control " id="theme" name="theme" value="{{ jeune[11] }} " required>
+                </div>
+                <div class="mb-3 ">
+                    <label for="activite" class="form-label ">Occupation</label>
+                    <input type="text" class="form-control" id="activite" name="activite" value="{{ jeune[12] }} " required>
+                </div>
+                <div class="mb-3 ">
+                    <label for="lieux" class="form-label">Lieux Souhaité</label>
+                    <input type="text" class="form-control" id="lieux" name="lieux" value="{{ jeune[13] }} " required>
+                </div>
+                <div class="mb-3 ">
+                    <label for="diplome" class="form-label ">Diplôme</label>
+                    <input type="text" class="form-control" id="diplome" name="diplome" value="{{ jeune[14] }} " required>
+                </div>
+                <div class="mb-3 ">
+                    <label for="telephone" class="form-label ">Téléphone</label>
+                    <input type="text" class="form-control" id="telephone" name="telephone" value="{{ jeune[15] }} " required>
+                </div>
+                <div class="mb-3 ">
+                    <label for="telephone2" class="form-label ">Téléphone (Facultatif)</label>
+                    <input type="text" class="form-control" id="telephone2" name="telephone2" value="{{ jeune[16] }} " required>
+                </div>
+                <div class="mb-3 ">
+                    <label for="typeFormation" class="form-label ">Type de Formation</label>
+                    <select class="form-control" id="typeFormation" name="typeFormation" value="{{ jeune[17] }} ">
+                        <option value="Présentielle">Présentielle</option>
+                        <option value="en ligne">en ligne</option>
+                        <option value="Les 2 en même temps">Les 2 en même temps</option>
+                    </select>
+                </div>
+            </div>
+            <!--
+            <div class="mb-3 ">
+                <label for="region " class="form-label ">Région</label>
+                <input type="text " class="form-control " id="region " name="region " required>
+            </div>-->
+            <div class="col-md-12 text-center ">
+                <button type="submit " class="btn btn-dark ">Enregistrer</button>
+            </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js "></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js " integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p " crossorigin="anonymous "></script>
+    <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const confirmation = confirm('Êtes-vous sûr de vouloir mettre à jour ce jeune ?');
+            if (!confirmation) {
+                e.preventDefault(); // Annule la soumission du formulaire si l'utilisateur a cliqué sur "Annuler " dans la boîte de dialogue.
+            }
+        });
+    </script>
+
+    <br> <br>
+
+    <footer class="footer ">
+        <div class="footer-info ">
+            <i class="bi bi-whatsapp "></i> +261 34 95 639 06
+            <span style="margin-left: 80px; "></span>
+        </div>
+        <div class="footer-contact ">
+            <i class="bi bi-envelope "></i> eamsiegetana@gmail.com
+            <span style="margin-left: 80px; "></span>
+            <i class="bi bi-geo-alt "></i> Lot 6A Ambohibao 101 - Antehiroka Madagascar
+            <span style="margin-left: 80px; "></span>
+        </div>
+        <div class="footer-social ">
+            <p class="d-inline ">Suivre nous sur :</p>
+            <span style="margin-left: 20px; "></span>
+            <a class="d-inline " href="#pageFacebook "><i class="bi bi-facebook "></i> </a> <span style="margin-left: 10px; "></span>
+            <a class="d-inline " href="https://www.linkedin.com/in/entreprendre-a-madagascar-a80860263 "><i class="bi bi-linkedin "></i> </a><span style="margin-left: 10px; "></span>
+            <a class="d-inline " href="https://twitter.com/YourTwitter "><i class="bi bi-twitter "></i> </a><span style="margin-left: 10px; "></span>
+            <a class="d-inline " href="https://www.entreprendre-a-madagascar.business.site "><i class="bi bi-globe "></i></a><span style="margin-left: 10px; "></span>
+        </div><br><br><br>
+        <hr style="width: 50%; margin: 0 auto; "><br>
+        <p class="footer-copyright ">Entreprendre à Madagascar 2023 © Tous droits réservés</p>
+    </footer>
+
+
+
+</body>
+
+</html>
